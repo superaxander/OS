@@ -3,6 +3,8 @@
 #include <stdint.h>
 #include "include/system.h"
 #include "include/tty.h"
+#include "include/gdt.h"
+#include "include/idt.h"
 
 uint8_t mk_color(int fg, int bg)
 {
@@ -14,12 +16,21 @@ uint8_t mk_color(int fg, int bg)
 void main()
 {
     int fg = 0;
-    int bg = 0;
     terminal_initialize();
+    terminal_writestring("Loaded!\n");
+    //install gdt
+    gdt_install();
+    terminal_writestring("GDT installed!\n");
+    //install idt
+    idt_install();
+    terminal_writestring("IDT installed!\n");
+
+
+    /*
     while(true){
         terminal_setcolor(mk_color(++fg%16, 0));
         terminal_writestring("Hello World How are you today?\n");
-    }
+    }*/
 
     /* ...and leave this loop in. There is an endless loop in
     *  'start.asm' also, if you accidentally delete this next line */
