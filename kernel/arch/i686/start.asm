@@ -69,8 +69,9 @@ idt_load:
 
 ; In just a few pages in this tutorial, we will add our Interrupt
 ; Service Routines (ISRs) right here!
+%include "kernel/arch/i686/isr.asm"
 
-
+%include "kernel/arch/i686/irq.asm"
 
 ; Here is the definition of our BSS section. Right now, we'll use
 ; it just to store the stack. Remember that a stack actually grows

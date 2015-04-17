@@ -5,6 +5,8 @@
 #include "include/tty.h"
 #include "include/gdt.h"
 #include "include/idt.h"
+#include "include/isr.h"
+#include "include/irq.h"
 
 uint8_t mk_color(int fg, int bg)
 {
@@ -15,7 +17,7 @@ uint8_t mk_color(int fg, int bg)
 *  infinite loop. This will be like our 'idle' loop */
 void main()
 {
-    int fg = 0;
+    //char zero[128];
     terminal_initialize();
     terminal_writestring("Loaded!\n");
     //install gdt
@@ -24,6 +26,10 @@ void main()
     //install idt
     idt_install();
     terminal_writestring("IDT installed!\n");
+    isr_install();
+    terminal_writestring("ISR's installed\n");
+    irq_install();
+    terminal_writestring("IRQ's installed\n");
 
 
     /*

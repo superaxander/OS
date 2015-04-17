@@ -8,4 +8,6 @@ unsigned short* memsetw(unsigned short *dest, unsigned short val, int count);
 size_t strlen(const char *str);
 unsigned char inportb (unsigned short _port);
 void outportb (unsigned short _port, unsigned char _data);
+void itoa(int n, char s[]);
+void reverse(char s[]);
 #endif
