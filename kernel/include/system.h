@@ -10,4 +10,5 @@ unsigned char inportb (unsigned short _port);
 void outportb (unsigned short _port, unsigned char _data);
 void itoa(int n, char s[]);
 void reverse(char s[]);
+extern void restore_interrupts();
 #endif

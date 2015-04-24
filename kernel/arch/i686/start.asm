@@ -41,6 +41,10 @@ mainloop:
     call main
     jmp $
 
+global restore_interrupts
+restore_interrupts:
+    sti
+    ret
 
 ; This will set up our new segment registers. We need to do
 ; something special in order to set CS. We do what is called a
