@@ -43,27 +43,44 @@ void outportb (unsigned short _port, unsigned char _data)
 
 void itoa(int n, char s[])//from K&R2
 {
-   int i, sign;
-
-     if ((sign = n) < 0)  /* record sign */
-         n = -n;          /* make n positive */
-   i = 0;
-     do {       /* generate digits in reverse order */
-         s[i++] = n % 10 + '0';   /* get next digit */
-     } while ((n /= 10) > 0);     /* delete it */
-   if (sign < 0)
-       s[i++] = '-';
-   s[i] = '\0';
-   reverse(s);
+  int i, sign;
+  if ((sign = n) < 0)  /* record sign */
+    n = -n;          /* make n positive */
+  i = 0;
+    do {       /* generate digits in reverse order */
+        s[i++] = n % 10 + '0';   /* get next digit */
+    } while ((n /= 10) > 0);     /* delete it */
+  if (sign < 0)
+      s[i++] = '-';
+  s[i] = '\0';
+  reverse(s);
 }
 void reverse(char s[])//from K&R too
 {
-   int i, j;
-   char c;
+  int i, j;
+  char c;
 
-   for (i = 0, j = strlen(s)-1; i<j; i++, j--) {
-       c = s[i];
-       s[i] = s[j];
-       s[j] = c;
-   }
+  for (i = 0, j = strlen(s)-1; i<j; i++, j--) {
+      c = s[i];
+      s[i] = s[j];
+      s[j] = c;
+  }
+}
+
+char *inttostr(int num, int base)
+{
+  char *str = "0123456789ABCDEF";
+  char buf[33];
+  int pos = 0;
+  if(i==0 || base > 16)
+    return "0";
+
+  while(num)
+  {
+    buf[pos] = str[num % base];
+    pos++;
+    num /= base;
+  }
+  buf[pos] = '\0';
+  return reverse(buf);
 }

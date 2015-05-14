@@ -12,7 +12,7 @@
 
 /* This is a very simple main() function. All it does is sit in an
 *  infinite loop. This will be like our 'idle' loop */
-void main()
+void main(struct multiboot *mboot_ptr)
 {
     terminal_initialize();
     terminal_writestring("Loaded!\n");
@@ -29,6 +29,9 @@ void main()
     restore_interrupts();
     timer_install();
     terminal_writestring("Timer installed\n");
+    terminal_writestring("Waiting 10 seconds\n");
+    timer_wait(10);
+    terminal_writestring("Done!");
     //while(true){
       //  itoa(i, str);
       //  terminal_writestring(str);

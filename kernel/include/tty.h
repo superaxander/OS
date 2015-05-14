@@ -31,5 +31,7 @@ void terminal_putchar(char c);
 void terminal_write(const char* data, size_t size);
 void terminal_writestring(const char* data);
 void terminal_setcolor(uint8_t fg, uint8_t bg);
+void terminal_writehex(uint32_t num);
+void terminal_writedec(uint32_t num);
 
 #endif

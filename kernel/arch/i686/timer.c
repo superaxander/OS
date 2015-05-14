@@ -8,8 +8,8 @@
 
 /* This will keep track of how many ticks that the system
 *  has been running for */
-unsigned timer_ticks = 0;
-unsigned long long int timer_seconds = 0;
+volatile static unsigned timer_ticks = 0;
+volatile static unsigned long long int timer_seconds = 0;
 
 /* Handles the timer. In this case, it's very simple: We
 *  increment the 'timer_ticks' variable every time the
@@ -18,7 +18,6 @@ unsigned long long int timer_seconds = 0;
 *  been smoking something funky */
 void timer_handler(struct regs *r)
 {
-    terminal_writestring("tick\n");
     /* Increment our 'tick count' */
     timer_ticks++;
 
@@ -28,7 +27,6 @@ void timer_handler(struct regs *r)
     {
         timer_ticks = 0;
         ++timer_seconds;
-        terminal_writestring("One second has passed\n");
     }
     if (timer_seconds >= ULLONG_MAX){ //after 18,446,744,073,709,551,615 / 60 / 60 / 24 / 365 = 584942417355 years it will skip a sleep. I hope that won't be a problem lol
         timer_seconds = 0;
@@ -46,5 +44,6 @@ void timer_install()
 void timer_wait(int seconds)
 {
     unsigned long long int target_time = timer_seconds + seconds;
-    while(timer_seconds < target_time);
+    while(timer_seconds < target_time)
+        __asm__ __volatile__("hlt");
 }

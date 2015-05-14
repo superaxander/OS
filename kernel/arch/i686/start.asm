@@ -37,7 +37,9 @@ mboot:
 ; will insert an 'extern _main', followed by 'call _main', right
 ; before the 'jmp $'.
 mainloop:
+    cli
     extern main
+    push EBX
     call main
     jmp $
 

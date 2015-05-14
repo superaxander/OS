@@ -33,3 +33,5 @@ build
 *.dSYM/
 
 .vagrant
+*.bin
+*.iso
